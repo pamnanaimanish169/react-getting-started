@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+/* 4/11/2021 START */
+.button {
+  float: right;
+}
+
+.mr-5 {
+  margin-right: 5px;
+}
+/* 4/11/2021 END */
