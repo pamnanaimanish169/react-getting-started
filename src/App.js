@@ -1,5 +1,5 @@
 import './App.css';
-import { Form, ListGroup } from 'react-bootstrap';
+import { Form, FormControl, InputGroup, ListGroup } from 'react-bootstrap';
 import   Button   from  'react-bootstrap/Button';
 import React from 'react';
 import axios from 'axios';
@@ -17,6 +17,8 @@ class App extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleListClick  = this.handleListClick.bind(this);
+    this.handleListItemChange = this.handleListItemChange.bind(this);
 
   }
 
@@ -27,6 +29,21 @@ class App extends React.Component {
 
   handleChange(event) {
     this.setState({todoValue  : event.target.value});
+  }
+
+  handleListClick(event)  {
+    console.log('i am called');
+    console.log(event);
+    console.log(event.target.disabled);
+
+    event.target.disabled = false;
+
+  }
+
+  handleListItemChange(event) {
+    console.log('list item change');
+
+    console.log(event.target.value);
   }
 
   handleSubmit(event) {
@@ -118,14 +135,17 @@ class App extends React.Component {
             <ListGroup  as="ul">
               {this.state.todoList.map((element, key) =>  {
                 return  (
-                <ListGroup.Item as  = "li"  key={element.id}>
-                  {element.name}
+                  <div>
+                  <ListGroup.Item className="p-0" as  = "li"  key={element.id.toString()}>
+                    <Form.Group onClick={this.handleListClick}>
+                      <Form.Control type="text" onChange={this.handleListItemChange} value={element.name} disabled></Form.Control>
+                      <Button className="mr-5" variant="danger" type="submit" onClick={(e)  => this.handleDelete(e, element.id)}>Delete</Button>
+                    </Form.Group>
 
-                  <div  className="button">
-                    <Button className="mr-5" variant="primary" type="submit" onClick={this.handleUpdate} >Update</Button>
-                    <Button className="mr-5" variant="danger" type="submit" onClick={(e)  => this.handleDelete(e, element.id)}>Delete</Button>
+                  </ListGroup.Item>
+
+                  
                   </div>
-                </ListGroup.Item>
                 )
               })}
             </ListGroup>
