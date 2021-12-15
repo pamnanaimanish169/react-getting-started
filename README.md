@@ -1,6 +1,6 @@
 # About
 
-CRUD Operations in React using an API
+CRUD Operations in React using a Mock API
 
 # Live Project URL:
 
